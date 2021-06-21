@@ -1,0 +1,534 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Playfair Display SC', serif;
+}
+
+body>div {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 00%;
+}
+
+.raz {
+  -moz-appearance: textfield;
+}
+.raz::-webkit-inner-spin-button {
+  display: none;
+}
+
+/* 1 окно с основными фигурами */
+
+/* двойные фигуры  */
+#canvas_triangle {
+  position: absolute;
+  transition: transform .2s;
+  transform: translate(-4px, -3px);
+}
+#canvas_t {
+  position: absolute;
+  transition: transform .2s;
+  transform: translate(4px, 3px);
+  cursor: pointer;
+}
+#canvas_t:hover {
+  transform: translate(0);
+}
+#canvas_quadr {
+  position: absolute;
+  transition: transform .2s;
+  transform: translate(-3px, -3px);
+}
+#canvas_q {
+  position: absolute;
+  transition: transform .2s;
+  transform: translate(3px, 3px);
+  cursor: pointer;
+}
+#canvas_q:hover {
+  transform: translate(0);
+}
+#canvas_circle {
+  position: absolute;
+  transition: transform .2s;
+  transform: translate(-4px, -3px);
+}
+#canvas_c {
+  position: absolute;
+  transition: transform .2s;
+  transform: translate(4px, 3px);
+  cursor: pointer;
+}
+#canvas_c:hover {
+  transform: translate(0);
+}
+#canvas_square {
+  position: absolute;
+  transition: transform .2s;
+  transform: translate(-3px, -3px);
+}
+#canvas_s {
+  position: absolute;
+  transition: transform .2s;
+  transform: translate(3px, 3px);
+  cursor: pointer;
+}
+#canvas_s:hover {
+  transform: translate(0);
+}
+#canvas_rectangle {
+  position: absolute;
+  transition: transform .2s;
+  transform: translate(-3px, -3px);
+}
+#canvas_r {
+  position: absolute;
+  transition: transform .2s;
+  transform: translate(3px, 3px);
+  cursor: pointer;
+}
+#canvas_r:hover {
+  transform: translate(0);
+}
+#canvas_rhombus {
+  position: absolute;
+  transition: transform .2s;
+  transform: translate(-5px, -1px);
+}
+#canvas_rh {
+  position: absolute;
+  transition: transform .2s;
+  transform: translate(5px, 1px);
+  cursor: pointer;
+}
+#canvas_rh:hover {
+  transform: translate(0);
+}
+#canvas_right_triangle {
+  position: absolute;
+  transition: transform .2s;
+  transform: translate(-7px, -3px);
+}
+#canvas_rt {
+  position: absolute;
+  transition: transform .2s;
+  transform: translate(7px, 3px);
+  cursor: pointer;
+}
+#canvas_rt:hover {
+  transform: translate(0);
+}
+#canvas_isosceles_triangle {
+  position: absolute;
+  transition: transform .2s;
+  transform: translate(-5px, -3px);
+}
+#canvas_it {
+  position: absolute;
+  transition: transform .2s;
+  transform: translate(5px, 3px);
+  cursor: pointer;
+}
+#canvas_it:hover {
+  transform: translate(0);
+}
+#canvas_equilateral_triangle {
+  position: absolute;
+  transition: transform .2s;
+  transform: translate(-5px, -3px);
+}
+#canvas_et {
+  position: absolute;
+  transition: transform .2s;
+  transform: translate(5px, 3px);
+  cursor: pointer;
+}
+#canvas_et:hover {
+  transform: translate(0);
+}
+
+.figures {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  grid-row-start: 2;
+}
+
+.figures>div>p {
+  text-align: center;
+}
+
+.figures>div>div {
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0 10px 20px, rgba(0, 0, 0, 0.23) 0 6px 6px;
+}
+
+fieldset {
+  width: 60%;
+  height: 80%;
+}
+
+fieldset>div {
+  height: 100%;
+  display: grid;
+  grid-template-rows: repeat(4, 25%);
+}
+
+fieldset>legend {
+  font-size: 2vh;
+}
+
+fieldset>div>p {
+  text-align: center;
+  font-size: 3vh;
+  font-weight: 500;
+  grid-row-start: 1;
+  align-self: center;
+}
+
+form {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.svg {
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  grid-row-start: 2;
+}
+
+.svg>line {
+  stroke: black;
+  stroke-width: 7;
+}
+
+.main_form>fieldset>div {
+  grid-template-rows: repeat(5, 20%);
+  justify-items: center;
+}
+
+.div_input {
+  width: 70%;
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: repeat(2, 50%);
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  grid-row-start: 4;
+  align-self: end;
+}
+
+.div_input>label {
+  display: grid;
+  grid-auto-flow: row;
+  justify-items: center;
+  font-size: 1.5vh;
+}
+
+input {
+  border: 1px solid black;
+  width: 10vw;
+  height: 4vh;
+  text-overflow: ellipsis;
+}
+
+.label_fst {
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+
+.label_snd {
+  grid-column-start: 1;
+  grid-row-start: 2;
+}
+
+.label_trd {
+  grid-column-start: 2;
+  grid-row-start: 1;
+}
+
+.label_frth {
+  grid-column-start: 2;
+  grid-row-start: 2;
+}
+
+.str>span {
+  font-size: 2vh;
+}
+
+.next {
+  cursor: pointer;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  width: 20vw;
+  height: 7vh;
+  border-radius: 5px;
+  font-size: 2.5vh;
+  grid-row-start: 4;
+  align-self: center;
+  justify-self: center;
+  text-align: center;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.next_form {
+  grid-row-start: 5;
+}
+
+select {
+  grid-row-start: 3;
+  width: 300px;
+  height: 50px;
+  font-family: 'Playfair Display SC', serif;
+  font-size: 2vh;
+  text-align: center;
+}
+
+.first_form_triangle>fieldset>div {
+  grid-template-rows: repeat(5, 20%);
+  justify-items: center;
+}
+
+.input_triangle {
+  display: grid;
+  grid-template-columns: repeat(3, 33%);
+  grid-template-rows: repeat(1, 100%);
+  align-self: center;
+}
+
+.label_fst_tri {
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+
+.label_snd_tri {
+  grid-column-start: 2;
+  grid-row-start: 1;
+}
+
+.label_trd_tri {
+  grid-column-start: 3;
+  grid-row-start: 1;
+}
+
+.line_values_form>fieldset>div {
+  display: grid;
+  grid-template-rows: repeat(5, 20%);
+  grid-template-columns: repeat(2, 50%);
+}
+
+.line_values_form>fieldset>div>p {
+  grid-column: 1 / 3;
+}
+
+.line_values_form>fieldset>div>svg {
+  grid-column-start: 1;
+  align-self: center;
+  justify-self: end;
+  grid-row: 2 / 5;
+}
+
+.line_values_input{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  grid-row: 2/5;
+  align-items: center;
+  justify-items: center;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.flex_child {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.flex_child>div>label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+.flex_child>div>label>input {
+  width: 8vw;
+}
+
+.line_values_next {
+  grid-column: 1 / 3;
+}
+
+.checkbox input {
+  opacity: 0;
+}
+.checkbox_text {
+  position: relative;
+  padding-left: 4em;
+  cursor: pointer;
+}
+.checkbox_text:before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 50px;
+  height: 26px;
+  border-radius: 13px;
+  background: #CDD1DA;
+  box-shadow: inset 0 2px 3px rgba(0,0,0,.2);
+  transition: .2s;
+}
+.checkbox_text:after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 10px;
+  background: #FFF;
+  box-shadow: 0 2px 5px rgba(0,0,0,.3);
+  transition: .2s;
+}
+.checkbox input:checked + .checkbox_text:before {
+  background: #9FD468;
+}
+.checkbox input:checked + .checkbox_text:after {
+  left: 26px;
+}
+.checkbox input:focus + .checkbox_text:before {
+  box-shadow: inset 0 2px 3px rgba(0,0,0,.2), 0 0 0 3px rgba(255,255,0,.7);
+}
+
+.check_h {
+  grid-row: 2/5;
+  grid-column-start: 2;
+  display: grid;
+  grid-template-rows: 35% 15% 35% 15%;
+  text-align: center;
+}
+
+.checkbox_fst {
+  grid-row-start: 1;
+  align-self: end;
+}
+.checkbox_snd {
+  grid-row-start: 2;
+  align-self: center;
+}
+.checkbox_trd {
+  grid-row-start: 3;
+}
+
+.input_height_value {
+  display: flex;
+  justify-content: space-evenly;
+  align-self: center;
+}
+
+
+
+/*переходы*/
+
+body>div.animation_one_h {
+  animation: move_one 1s ease-out forwards;
+}
+body>div.animation_two_h {
+  animation: move_two 1s ease-out forwards;
+}
+body>div.animation_three_h {
+  animation: move_three 1s ease-out forwards;
+}
+body>div.animation_four_h {
+  animation: move_four 1s ease-out forwards;
+}
+body>div.animation_five_h {
+  animation: move_five 1s ease-out forwards;
+}
+body>div.animation_from_four_to_eight_h {
+  animation: move_from_four_to_eight_h 1s ease-out forwards;
+}
+body>div.animation_six_h {
+  animation: move_six 1s ease-out forwards;
+}
+body>div.animation_seven_h {
+  animation: move_seven 1s ease-out forwards;
+}
+body>div.animation_eight_h {
+  animation: move_eight 1s ease-out forwards;
+}
+body>div.animation_nine_h {
+  animation: move_nine 1s ease-out forwards;
+}
+body>div.animation_ten_h {
+  animation: move_ten 1s ease-out forwards;
+}
+body>div.animation_eleven_h {
+  animation: move_eleven 1s ease-out forwards;
+}
+body>div.animation_twelve_h {
+  animation: move_twelve 1s ease-out forwards;
+}
+@keyframes move_one {
+  from { top: 0%; }
+  to { top: -100%; }
+}
+@keyframes move_two {
+  from { top: -100%; }
+  to { top: -200%; }
+}
+@keyframes move_three {
+  from { top: -200%; }
+  to { top: -300%; }
+}
+@keyframes move_four {
+  from { top: -300%; }
+  to { top: -400%; }
+}
+@keyframes move_five {
+  from { top: -400%; }
+  to { top: -500%; }
+}
+@keyframes move_from_four_to_eight_h {
+  from { top: -400%; }
+  to { top: -800%; }
+}
+@keyframes move_six {
+  from { top: -500%; }
+  to { top: -600%; }
+}
+@keyframes move_seven {
+  from { top: -600%; }
+  to { top: -700%; }
+}
+@keyframes move_eight {
+  from { top: -700%; }
+  to { top: -800%; }
+}
+@keyframes move_nine {
+  from { top: -800%; }
+  to { top: -900%; }
+}
+@keyframes move_ten {
+  from { top: -900%; }
+  to { top: -1000%; }
+}
+@keyframes move_eleven {
+  from { top: -1000%; }
+  to { top: -1100%; }
+}
+@keyframes move_twelve {
+  from { top: -1100%; }
+  to { top: -1200%; }
+}

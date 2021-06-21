@@ -1,0 +1,678 @@
+<html>
+
+<head>
+  <title>GEOM</title>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./stylesheets/style.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="http://d3js.org/d3.v3.js"></script>
+  <script type="text/javascript" src="./tau_prolog/core.js"></script>
+  <script type="text/javascript" src="./tau_prolog/lists.js"></script>
+  <script type="text/javascript" src="./javascripts/figure.js"></script>
+  <script type="text/javascript" src="./javascripts/parallelogram.js"></script>
+  <script defer type="text/javascript" src="./javascripts/filling_classes.js"></script>
+  <script defer type="text/javascript" src="./javascripts/script.js"></script>
+  <script defer type="text/javascript" src="./javascripts/tau.js"></script>
+  <script defer type="text/javascript" src="./javascripts/rendering.js"></script>
+  <script defer type="text/javascript" src="./javascripts/jumps.js"></script>
+  <script defer type="text/javascript" src="./javascripts/backlight.js"></script>
+</head>
+
+<body>
+
+  <div>
+
+    <form action="">
+      <fieldset>
+        <legend>Основная фигура задачи</legend>
+        <div>
+          <p>Выберите основную фигуру вашей задачи</p>
+
+          <div class="figures">
+            <div class="fst_fig">
+              <p>Треугольник</p>
+              <canvas id='canvas_triangle'></canvas>
+              <canvas id='canvas_t'></canvas>
+              <div></div>
+            </div>
+            <div class="snd_fig">
+              <p>Параллелограмм</p>
+              <canvas id='canvas_quadr'></canvas>
+              <canvas id='canvas_q'></canvas>
+              <div></div>
+            </div>
+            <div class="trd_fig">
+              <p>Круг</p>
+              <canvas id='canvas_circle'></canvas>
+              <canvas id='canvas_c'></canvas>
+              <div></div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+
+    <form action="" style="display:none" class="special_case_parallelogram">
+      <fieldset>
+        <legend>Частный случай фигур</legend>
+        <div>
+          <p class="str" style="white-space: pre-line">Является ли основная фигура задачи частным случаем параллелограмма?
+
+          <span>(Если это неизвестно из условия задачи, нажмите кнопку "далее")</span></p>
+
+          <div class="figures">
+            <div class="frth_fig">
+              <p>Квадрат</p>
+              <canvas id='canvas_square'></canvas>
+              <canvas id='canvas_s'></canvas>
+              <div></div>
+            </div>
+            <div class="fth_fig">
+              <p>Прямоугольник</p>
+              <canvas id='canvas_rectangle'></canvas>
+              <canvas id='canvas_r'></canvas>
+              <div></div>
+            </div>
+            <div class="sth_fig">
+              <p>Ромб</p>
+              <canvas id='canvas_rhombus'></canvas>
+              <canvas id='canvas_rh'></canvas>
+              <div></div>
+            </div>
+          </div>
+
+          <div id="next_special_case_parallelogram" class="next">Далее</div>
+        </div>
+      </fieldset>
+    </form>
+
+    <form action="" style="display:none" class="special_case_triangle">
+      <fieldset>
+        <legend>Частный случай фигур</legend>
+        <div>
+          <p class="str" style="white-space: pre-line">Является ли основная фигура задачи частным случаем треугольника?
+
+            <span>(Если это неизвестно из условия задачи, нажмите кнопку "далее")</span></p>
+
+          <div class="figures">
+            <div class="frth_fig">
+              <p>Прямоугольный<br>треугольник</p>
+              <canvas id='canvas_right_triangle'></canvas>
+              <canvas id='canvas_rt'></canvas>
+              <div></div>
+            </div>
+            <div class="fth_fig">
+              <p>Равнобедренный<br>треугольник</p>
+              <canvas id='canvas_isosceles_triangle'></canvas>
+              <canvas id='canvas_it'></canvas>
+              <div></div>
+            </div>
+            <div class="sth_fig">
+              <p>Равносторонний<br>треугольник</p>
+              <canvas id='canvas_equilateral_triangle'></canvas>
+              <canvas id='canvas_et'></canvas>
+              <div></div>
+            </div>
+          </div>
+
+          <div id="next_special_case_triangle" class="next">Далее</div>
+        </div>
+      </fieldset>
+    </form>
+
+    <div class="triangle_list">
+
+      <div class="triangle" style="">
+
+        <form class="first_form_triangle" action="">
+          <fieldset>
+            <legend>Длины сторон</legend>
+            <div>
+              <p class="str" style="white-space: pre-line">Задайте значения сторонам треугольника.
+
+                <span>(Если значения неизвестны в условии задачи, нажмите кнопку "далее")</span></p>
+
+              <svg class="svg" width="350" height="250"></svg>
+
+              <div class="div_input input_triangle">
+                <label class="label_fst_tri"> Первая сторона -<br>AB <input type="number" min="1" placeholder="Введите значение" class="raz input_fst"></label>
+                <label class="label_snd_tri"> Вторая сторона -<br>BC <input type="number" min="1" placeholder="Введите значение" class="raz input_snd"></label>
+                <label class="label_trd_tri"> Третья сторона -<br>AC <input type="number" min="1" placeholder="Введите значение" class="raz input_trd"></label>
+              </div>
+
+              <div class="next_tri_one_h next next_form">Далее</div>
+            </div>
+          </fieldset>
+        </form>
+
+        <form class="main_form" action="">
+          <fieldset>
+            <legend>Градусная мера углов</legend>
+            <div>
+              <p class="str" style="white-space: pre-line">Задайте значения углам треугольника.
+
+                <span>(Если значения неизвестны в условии задачи, нажмите кнопку "далее")</span></p>
+
+              <svg class="svg" width="350" height="250">
+                <path class="angle_a_tri" d="M98,182Q112,182 108,200"
+                      style="stroke:black; stroke-width:3; fill:none;"/>
+                <path class="angle_b_tri" d="M193,68Q203,85 216,70"
+                      style="stroke:black; stroke-width:3; fill:none;"/>
+                <path class="angle_c_tri" d="M260,182Q245,184 248,201"
+                      style="stroke:black; stroke-width:3; fill:none;"/>
+              </svg>
+
+              <div class="div_input input_triangle">
+                <label class="label_fst_tri"> Первый угол -<br>∠BAC <input type="number" min="0" placeholder="Введите значение" class="raz input_angle_fst_tri"></label>
+                <label class="label_snd_tri"> Второй угол -<br>∠ABC <input type="number" min="0" placeholder="Введите значение" class="raz input_angle_snd_tri"></label>
+                <label class="label_trd_tri"> Третий угол -<br>∠BCA <input type="number" min="0" placeholder="Введите значение" class="raz input_angle_trd_tri"></label>
+              </div>
+
+              <div class="next_tri_two_h next next_form">Далее</div>
+            </div>
+          </fieldset>
+        </form>
+
+        <form class="main_form line_values_form" action="">
+          <fieldset>
+            <legend>Высоты треугольника</legend>
+            <div>
+              <p class="str" style="white-space: pre-line">Укажите высоты, имеющиеся в условии задачи.
+
+                <span>(Если высоты не фигурируют в условии задачи, нажмите кнопку "далее")</span></p>
+
+              <svg class="svg" width="350" height="250">
+                <text x="120" y="105" font-size="30" font-weight="bold">H</text>
+                <text x="120" y="105" font-size="20" dx="1.2em" dy="0em">1</text>
+                <text x="250" y="135" font-size="30" font-weight="bold">H</text>
+                <text x="250" y="135" font-size="20" dx="1.2em" dy="0em">2</text>
+                <text x="190" y="230" font-size="30" font-weight="bold">H</text>
+                <text x="190" y="230" font-size="20" dx="1.2em" dy="0em">3</text>
+
+                <polyline points="156,115 165,122 172,114"
+                          style="stroke:black;stroke-width:3;fill:none" />
+                <polygon class="a_h"
+                      points="168,104 164,109 259,196 265,196 261,189"
+                      style="fill: black"/>
+                <polyline points="245,140 233,145 227,134"
+                          style="stroke:black;stroke-width:3;fill:none" />
+                <polygon class="b_h"
+                      points="236,128 95,190 90,196 96,196 238,134"
+                      style="fill: black"/>
+                <polyline points="195,202 195,188 207,188"
+                          style="stroke:black;stroke-width:3;fill:none" />
+                <polygon class="c_h"
+                         points="204,62 204,196 210,196 210,66 207,58"
+                         style="fill: black"/>
+
+                <line x1="159" y1="105" x2="266" y2="202" style="stroke-width:1;stroke:black"/>
+                <line x1="163" y1="101" x2="264" y2="192" style="stroke-width:1;stroke:black"/>
+                <line x1="238" y1="128" x2="82" y2="196" style="stroke-width:1;stroke:black"/>
+                <line x1="242" y1="132" x2="84" y2="201" style="stroke-width:1;stroke:black"/>
+                <line x1="210" y1="51" x2="210" y2="202" style="stroke-width:1;stroke:black"/>
+                <line x1="204" y1="55" x2="204" y2="202" style="stroke-width:1;stroke:black"/>
+
+                <text x="175" y="160" font-size="25" font-weight="bold" style="fill: #38B2CE; stroke: black">O</text>
+                <circle cx="207" cy="145" r="4" style="fill: #38B2CE; stroke: black"/>
+              </svg>
+
+              <div class="check_h">
+                <label class="checkbox checkbox_fst">
+                  <input class="i_checkbox_fst_h" type="checkbox" />
+                  <div class="checkbox_text">Высота к первой стороне -<br> CH1</div>
+                </label>
+                <label class="checkbox checkbox_snd">
+                  <input class="i_checkbox_snd_h" type="checkbox" />
+                  <div class="checkbox_text">Высота ко второй стороне -<br> AH2</div>
+                </label>
+                <label class="checkbox checkbox_trd">
+                  <input class="i_checkbox_trd_h" type="checkbox" />
+                  <div class="checkbox_text">Высота к третьей стороне -<br> BH3</div>
+                </label>
+              </div>
+
+              <div class="next_tri_three_h next next_form line_values_next">Далее</div>
+            </div>
+          </fieldset>
+        </form>
+
+        <form class="main_form" action="">
+          <fieldset>
+            <legend>Высоты треугольника</legend>
+            <div>
+              <p class="str" style="white-space: pre-line">Задайте значения высот треугольника.
+
+                <span>(Если значения высот не фигурируют в условии задачи, нажмите кнопку "далее")</span></p>
+
+              <svg class="svg svg_height" width="350" height="250"></svg>
+
+              <div class="div_input input_height_value">
+                <label id='i_tri_h_fst' style="display: none"> Высота к первой стороне -<br> CH1 <br><input type="number" min="1" placeholder="Введите значение" class="raz input_fst_h"></label>
+                <label id='i_tri_h_snd' style="display: none"> Высота ко второй стороне -<br> AH2 <br><input type="number" min="1" placeholder="Введите значение" class="raz input_snd_h"></label>
+                <label id='i_tri_h_trd' style="display: none"> Высота к третьей стороне -<br> BH3 <br><input type="number" min="1" placeholder="Введите значение" class="raz input_trd_h"></label>
+              </div>
+
+              <div class="next_tri_four_h next next_form">Далее</div>
+            </div>
+          </fieldset>
+        </form>
+
+        <form class="main_form line_values_form" action="">
+          <fieldset>
+            <legend>Значения отрезков</legend>
+            <div>
+              <p class="str" style="white-space: pre-line">Задайте значения отрезков, на которые делятся и делят стороны высоты.
+
+                <span>(Если значения отрезков не фигурируют в условии задачи, нажмите кнопку "далее")</span></p>
+
+              <svg class="svg svg_lines svg_height" width="350" height="250"></svg>
+
+              <div class="line_values_input">
+                <div class="flex_child">
+                  <div style="display: none" class="label_ah1"><label> AH1 <input type="number" min="1" placeholder="Введите значение" class="raz input_ah1"></label></div>
+                  <div style="display: none" class="label_h1b"><label> H1B <input type="number" min="1" placeholder="Введите значение" class="raz input_h1b"></label></div>
+                  <div style="display: none" class="label_bh2"><label> BH2 <input type="number" min="1" placeholder="Введите значение" class="raz input_bh2"></label></div>
+                  <div style="display: none" class="label_h2c"><label> H2C <input type="number" min="1" placeholder="Введите значение" class="raz input_h2c"></label></div>
+                  <div style="display: none" class="label_ah3"><label> AH3 <input type="number" min="1" placeholder="Введите значение" class="raz input_ah3"></label></div>
+                  <div style="display: none" class="label_h3c"><label> H3C <input type="number" min="1" placeholder="Введите значение" class="raz input_h3c"></label></div>
+                </div>
+                <div class="flex_child">
+                  <div style="display: none" class="label_ao"><label> AO <input type="number" min="1" placeholder="Введите значение" class="raz input_ao"></label></div>
+                  <div style="display: none" class="label_h1o"><label> H1O <input type="number" min="1" placeholder="Введите значение" class="raz input_h1o"></label></div>
+                  <div style="display: none" class="label_bo"><label> BO <input type="number" min="1" placeholder="Введите значение" class="raz input_bo"></label></div>
+                  <div style="display: none" class="label_h2o"><label> H2O <input type="number" min="1" placeholder="Введите значение" class="raz input_h2o"></label></div>
+                  <div style="display: none" class="label_co"><label> CO <input type="number" min="1" placeholder="Введите значение" class="raz input_co"></label></div>
+                  <div style="display: none" class="label_h3o"><label> H3O <input type="number" min="1" placeholder="Введите значение" class="raz input_h3o"></label></div>
+                </div>
+              </div>
+
+              <div class="next_tri_five_h next next_form line_values_next">Далее</div>
+            </div>
+          </fieldset>
+        </form>
+
+        <form class="main_form line_values_form" action="">
+          <fieldset>
+            <legend>Значения образованных углов</legend>
+            <div>
+              <p class="str" style="white-space: pre-line">Задайте значения углов, образованных высотами.
+
+                <span>(Если значения углов не фигурируют в условии задачи, нажмите кнопку "далее")</span></p>
+
+              <svg class="svg svg_angles svg_height" width="350" height="250"></svg>
+
+              <div class="line_values_input">
+                <div class="flex_child">
+                  <div style="display: none" class="label_bah2"><label> ∠BAH2 <input type="number" min="1" placeholder="Введите значение" class="raz input_bah2"></label></div>
+                  <div style="display: none" class="label_h2ac"><label> ∠H2AC <input type="number" min="1" placeholder="Введите значение" class="raz input_h2ac"></label></div>
+                  <div style="display: none" class="label_abh3"><label> ∠ABH3 <input type="number" min="1" placeholder="Введите значение" class="raz input_abh3"></label></div>
+                  <div style="display: none" class="label_h3bc"><label> ∠H3BC <input type="number" min="1" placeholder="Введите значение" class="raz input_h3bc"></label></div>
+                  <div style="display: none" class="label_bch1"><label> ∠BCH1 <input type="number" min="1" placeholder="Введите значение" class="raz input_bch1"></label></div>
+                  <div style="display: none" class="label_h1ca"><label> ∠H1CA <input type="number" min="1" placeholder="Введите значение" class="raz input_h1ca"></label></div>
+                </div>
+              </div>
+
+              <div class="next_tri_six_h next next_form line_values_next">Далее</div>
+            </div>
+          </fieldset>
+        </form>
+
+        <form class="main_form line_values_form" action="">
+          <fieldset>
+            <legend>Биссектрисы треугольника</legend>
+            <div>
+              <p class="str" style="white-space: pre-line">Укажите биссектрисы, имеющиеся в условии задачи.
+
+                <span>(Если биссектрисы не фигурируют в условии задачи, нажмите кнопку "далее")</span></p>
+
+              <svg class="svg_after_h svg svg_main_bisector" width="350" height="250"></svg>
+
+              <div class="check_h">
+                <label class="checkbox checkbox_fst">
+                  <input class="i_checkbox_fst_i" type="checkbox" />
+                  <div class="checkbox_text">Биссектриса к первой стороне -<br> CI1</div>
+                </label>
+                <label class="checkbox checkbox_snd">
+                  <input class="i_checkbox_snd_i" type="checkbox" />
+                  <div class="checkbox_text">Биссектриса ко второй стороне -<br> AI2</div>
+                </label>
+                <label class="checkbox checkbox_trd">
+                  <input class="i_checkbox_trd_i" type="checkbox" />
+                  <div class="checkbox_text">Биссектриса к третьей стороне -<br> BI3</div>
+                </label>
+              </div>
+
+              <div class="next_tri_seven_h next next_form line_values_next">Далее</div>
+            </div>
+          </fieldset>
+        </form>
+
+        <form class="main_form" action="">
+          <fieldset>
+            <legend>Биссектрисы треугольника</legend>
+            <div>
+              <p class="str" style="white-space: pre-line">Задайте значения биссектрис треугольника.
+
+                <span>(Если значения биссектрис не фигурируют в условии задачи, нажмите кнопку "далее")</span></p>
+
+              <svg class="svg svg_height" width="350" height="250"></svg>
+
+              <div class="div_input input_height_value">
+                <label id='i_tri_i_fst' style="display: none"> Высота к первой стороне -<br> CH1 <br><input type="number" min="1" placeholder="Введите значение" class="raz input_fst_h"></label>
+                <label id='i_tri_i_snd' style="display: none"> Высота ко второй стороне -<br> AH2 <br><input type="number" min="1" placeholder="Введите значение" class="raz input_snd_h"></label>
+                <label id='i_tri_i_trd' style="display: none"> Высота к третьей стороне -<br> BH3 <br><input type="number" min="1" placeholder="Введите значение" class="raz input_trd_h"></label>
+              </div>
+
+              <div class="next_tri_four_h next next_form">Далее</div>
+            </div>
+          </fieldset>
+        </form>
+
+      </div>
+
+
+
+
+
+
+      <div class="right_triangle" style="display: none">
+
+        <form class="first_form_triangle" action="">
+          <fieldset>
+            <legend>Длины сторон</legend>
+            <div>
+              <p class="str" style="white-space: pre-line">Задайте значения сторонам треугольника.
+
+                <span>(Если значения неизвестны в условии задачи, нажмите кнопку "далее")</span></p>
+
+              <svg class="svg" width="350" height="250"></svg>
+
+              <div class="div_input input_triangle">
+                <label class="label_fst_tri"> Первая сторона -<br>AB <input id ="first_side" type="number" min="1" placeholder="Введите значение" class="raz input_fst"></label>
+                <label class="label_snd_tri"> Вторая сторона -<br>BC <input id ="second_side" type="number" min="1" placeholder="Введите значение" class="raz input_snd"></label>
+                <label class="label_trd_tri"> Третья сторона -<br>AC <input id ="third_side" type="number" min="1" placeholder="Введите значение" class="raz input_trd"></label>
+              </div>
+
+              <div class="next_tri_one_h next next_form">Далее</div>
+            </div>
+          </fieldset>
+        </form>
+
+        <form class="main_form" action="">
+          <fieldset>
+            <legend>Градусная мера углов</legend>
+            <div>
+              <p class="str" style="white-space: pre-line">Задайте значения углам треугольника.
+
+                <span>(Если значения неизвестны в условии задачи, нажмите кнопку "далее")</span></p>
+
+              <svg class="svg" width="350" height="250">
+                <path class="angle_a_tri" d="M98,182Q112,182 108,200"
+                      style="stroke:black; stroke-width:3; fill:none;"/>
+                <path class="angle_b_tri" d="M193,68Q203,85 216,70"
+                      style="stroke:black; stroke-width:3; fill:none;"/>
+                <path class="angle_c_tri" d="M260,182Q245,184 248,201"
+                      style="stroke:black; stroke-width:3; fill:none;"/>
+              </svg>
+
+              <div class="div_input input_triangle">
+                <label class="label_fst_tri"> Первый угол -<br>∠BAC <input type="number" min="0" placeholder="Введите значение" class="raz input_angle_fst_tri"></label>
+                <label class="label_snd_tri"> Второй угол -<br>∠ABC <input type="number" min="0" placeholder="Введите значение" class="raz input_angle_snd_tri"></label>
+                <label class="label_trd_tri"> Третий угол -<br>∠BCA <input type="number" min="0" placeholder="Введите значение" class="raz input_angle_trd_tri"></label>
+              </div>
+
+              <div class="next_tri_two_h next next_form">Далее</div>
+            </div>
+          </fieldset>
+        </form>
+
+        <form class="main_form line_values_form" action="">
+          <fieldset>
+            <legend>Высоты треугольника</legend>
+            <div>
+              <p class="str" style="white-space: pre-line">Укажите высоты, имеющиеся в условии задачи.
+
+                <span>(Если высоты не фигурируют в условии задачи, нажмите кнопку "далее")</span></p>
+
+              <svg class="svg" width="350" height="250">
+                <text x="120" y="105" font-size="30" font-weight="bold">H</text>
+                <text x="120" y="105" font-size="20" dx="1.2em" dy="0em">1</text>
+                <text x="250" y="135" font-size="30" font-weight="bold">H</text>
+                <text x="250" y="135" font-size="20" dx="1.2em" dy="0em">2</text>
+                <text x="190" y="230" font-size="30" font-weight="bold">H</text>
+                <text x="190" y="230" font-size="20" dx="1.2em" dy="0em">3</text>
+
+                <polyline points="156,115 165,122 172,114"
+                          style="stroke:black;stroke-width:3;fill:none" />
+                <line class="a_h"
+                      x1="161" y1="103" x2="270" y2="202"
+                      style="stroke-width:6"/>
+                <polyline points="245,140 233,145 227,134"
+                          style="stroke:black;stroke-width:3;fill:none" />
+                <line class="b_h"
+                      x1="240" y1="130" x2="82" y2="199"
+                      style="stroke-width:6"/>
+                <polyline points="195,202 195,188 207,188"
+                          style="stroke:black;stroke-width:3;fill:none" />
+                <line class="c_h"
+                      x1="207" y1="51" x2="207" y2="202"
+                      style="stroke-width:6"/>
+
+                <line x1="159" y1="105" x2="266" y2="202" style="stroke-width:1;stroke:black"/>
+                <line x1="163" y1="101" x2="272" y2="200" style="stroke-width:1;stroke:black"/>
+                <line x1="238" y1="128" x2="80" y2="197" style="stroke-width:1;stroke:black"/>
+                <line x1="242" y1="132" x2="84" y2="201" style="stroke-width:1;stroke:black"/>
+                <line x1="210" y1="51" x2="210" y2="202" style="stroke-width:1;stroke:black"/>
+                <line x1="204" y1="55" x2="204" y2="202" style="stroke-width:1;stroke:black"/>
+
+                <text x="175" y="160" font-size="25" font-weight="bold" style="fill: #38B2CE; stroke: black">O</text>
+                <circle cx="207" cy="145" r="4" style="fill: #38B2CE; stroke: black"/>
+              </svg>
+
+              <div class="check_h">
+                <label class="checkbox checkbox_fst">
+                  <input class="i_checkbox_fst_h" type="checkbox" />
+                  <div class="checkbox_text">Высота к первой стороне -<br> CH1</div>
+                </label>
+                <label class="checkbox checkbox_snd">
+                  <input class="i_checkbox_snd_h" type="checkbox" />
+                  <div class="checkbox_text">Высота ко второй стороне -<br> AH2</div>
+                </label>
+                <label class="checkbox checkbox_trd">
+                  <input class="i_checkbox_trd_h" type="checkbox" />
+                  <div class="checkbox_text">Высота к третьей стороне -<br> BH3</div>
+                </label>
+              </div>
+
+              <div class="next_tri_three_h next next_form line_values_next">Далее</div>
+            </div>
+          </fieldset>
+        </form>
+
+        <form class="main_form" action="">
+          <fieldset>
+            <legend>Высоты треугольника</legend>
+            <div>
+              <p class="str" style="white-space: pre-line">Задайте значения высот треугольника.
+
+                <span>(Если значения высот не фигурируют в условии задачи, нажмите кнопку "далее")</span></p>
+
+              <svg class="svg" width="350" height="250"></svg>
+
+              <div class="div_input input_height_value">
+                <label id='i_tri_h_fst' style="display: none"> Высота к первой стороне -<br> CH1 <br><input type="number" min="1" placeholder="Введите значение" class="raz input_fst_h"></label>
+                <label id='i_tri_h_snd' style="display: none"> Высота ко второй стороне -<br> AH2 <br><input type="number" min="1" placeholder="Введите значение" class="raz input_snd_h"></label>
+                <label id='i_tri_h_trd' style="display: none"> Высота к третьей стороне -<br> BH3 <br><input type="number" min="1" placeholder="Введите значение" class="raz input_trd_h"></label>
+              </div>
+
+              <div class="next_tri_four_h next next_form">Далее</div>
+            </div>
+          </fieldset>
+        </form>
+
+        <form class="main_form line_values_form" action="">
+          <fieldset>
+            <legend>Значения отрезков</legend>
+            <div>
+              <p class="str" style="white-space: pre-line">Задайте значения отрезков, на которые делятся и делят стороны высоты.
+
+                <span>(Если значения отрезков не фигурируют в условии задачи, нажмите кнопку "далее")</span></p>
+
+              <svg class="svg" width="350" height="250">
+
+                <text x="120" y="105" font-size="30" font-weight="bold">H</text>
+                <text x="120" y="105" font-size="20" dx="1.2em" dy="0em">1</text>
+                <text x="250" y="135" font-size="30" font-weight="bold">H</text>
+                <text x="250" y="135" font-size="20" dx="1.2em" dy="0em">2</text>
+                <text x="190" y="230" font-size="30" font-weight="bold">H</text>
+                <text x="190" y="230" font-size="20" dx="1.2em" dy="0em">3</text>
+
+                <polyline points="156,115 165,122 172,114"
+                          style="stroke:black;stroke-width:3;fill:none" />
+                <line class="a_h"
+                      x1="161" y1="103" x2="270" y2="202"
+                      style="stroke-width:5"/>
+                <polyline points="245,140 233,145 227,134"
+                          style="stroke:black;stroke-width:3;fill:none" />
+                <line class="b_h"
+                      x1="240" y1="130" x2="82" y2="199"
+                      style="stroke-width:5"/>
+                <polyline points="195,202 195,188 207,188"
+                          style="stroke:black;stroke-width:3;fill:none" />
+                <line class="c_h"
+                      x1="207" y1="51" x2="207" y2="202"
+                      style="stroke-width:5"/>
+
+                <text x="175" y="160" font-size="25" font-weight="bold" style="fill: #38B2CE; stroke: black">O</text>
+                <circle cx="207" cy="145" r="4" style="fill: #38B2CE"/>
+              </svg>
+
+              <div class="div_input line_values_input">
+                <label style="display: none" class="label_fst_line_values_tri"> AH1 <input type="number" min="1" placeholder="Введите значение" class="raz input_fst_line_values_tri"></label>
+                <label style="display: none"class="label_snd_line_values_tri"> H1B <input type="number" min="1" placeholder="Введите значение" class="raz input_snd_line_values_tri"></label>
+                <label style="display: none"class="label_trd_line_values_tri"> BH2 <input type="number" min="1" placeholder="Введите значение" class="raz input_trd_line_values_tri"></label>
+                <label style="display: none"class="label_frth_line_values_tri"> H2C <input type="number" min="1" placeholder="Введите значение" class="raz input_frth_line_values_tri"></label>
+                <label class="label_fth_line_values_tri"> AH3 <input type="number" min="1" placeholder="Введите значение" class="raz input_fth_line_values_tri"></label>
+                <label class="label_sxth_line_values_tri"> H3C <input type="number" min="1" placeholder="Введите значение" class="raz input_sxth_line_values_tri"></label>
+                <label style="display: none" class="label_sth_line_values_tri"> AO <input type="number" min="1" placeholder="Введите значение" class="raz input_sth_line_values_tri"></label>
+                <label style="display: none"class="label_eth_line_values_tri"> H1O <input type="number" min="1" placeholder="Введите значение" class="raz input_eth_line_values_tri"></label>
+                <label style="display: none"class="label_nth_line_values_tri"> BO <input type="number" min="1" placeholder="Введите значение" class="raz input_nth_line_values_tri"></label>
+                <label style="display: none"class="label_tnth_line_values_tri"> H2O <input type="number" min="1" placeholder="Введите значение" class="raz input_tnth_line_values_tri"></label>
+                <label class="label_enth_line_values_tri"> CO <input type="number" min="1" placeholder="Введите значение" class="raz input_enth_line_values_tri"></label>
+                <label class="label_tth_line_values_tri"> H3O <input type="number" min="1" placeholder="Введите значение" class="raz input_tth_line_values_tri"></label>
+              </div>
+
+              <div id="next_" class="next next_form line_values_next">Далее</div>
+            </div>
+          </fieldset>
+        </form>
+
+      </div>
+
+    </div>
+
+    <div class="parallelogram_list">
+      <form class="main_form" action="">
+        <fieldset>
+          <legend>Длины сторон</legend>
+          <div>
+            <p class="str" style="white-space: pre-line">Задайте значения сторонам параллелограмма.
+
+              <span>(Если значения неизвестны в условии задачи, нажмите кнопку "далее")</span></p>
+
+            <svg class="svg" width="350" height="250">
+              <line class="a"
+                      x1="80" y1="50" x2="40" y2="202" />
+              <line class="b"
+                      x1="78" y1="50" x2="312" y2="50"  />
+              <line class="c"
+                      x1="310" y1="50" x2="270" y2="202"/>
+              <line class="d"
+                     x1="40" y1="200" x2="272" y2="200" />
+            </svg>
+
+            <div class="div_input">
+              <label class="label_fst"> Первая сторона <input id ="first_side_parallelogram" type="number" min="1" placeholder="Введите значение" class="raz input_fst"></label>
+              <label class="label_snd"> Вторая сторона <input id ="second_side_parallelogram" type="number" min="1" placeholder="Введите значение" class="raz input_snd"></label>
+              <label class="label_trd"> Третья сторона <input id ="third_side_parallelogram" type="number" min="1" placeholder="Введите значение" class="raz input_trd"></label>
+              <label class="label_frth"> Четвертая сторона <input id ="fourth_side_parallelogram" type="number" min="1" placeholder="Введите значение" class="raz input_frth"></label>
+            </div>
+
+            <div id="next_s" class="next next_form">Далее</div>
+          </div>
+        </fieldset>
+      </form>
+
+      <form class="main_form" action="">
+        <fieldset>
+          <legend>Градусная мера углов</legend>
+          <div>
+            <p class="str" style="white-space: pre-line">Задайте значения углам параллелограмма.
+
+              <span>(Если значения неизвестны в условии задачи, нажмите кнопку "далее")</span></p>
+
+            <svg class="svg" width="350" height="250">
+              <line class="ang_a"
+                    x1="80" y1="50" x2="40" y2="202" />
+              <line class="ang_b"
+                    x1="78" y1="50" x2="312" y2="50"  />
+              <line class="ang_c"
+                    x1="310" y1="50" x2="270" y2="202"/>
+              <line class="ang_d"
+                    x1="40" y1="200" x2="272" y2="200" />
+              <path class="angle_a" d="M100,50 Q98,61 91,65 T75,65 "
+                    style="stroke:black; stroke-width:4; fill:none;"/>
+              <path class="angle_b" d="M45,180 Q55,179 60,186 T62,200 "
+                    style="stroke:black; stroke-width:4; fill:none;"/>
+              <path class="angle_c" d="M285,50 Q286,56 291,61 T305,65 "
+                    style="stroke:black; stroke-width:4; fill:none;"/>
+              <path class="angle_d" d="M250,200 Q250,189 257,185 T275,185 "
+                    style="stroke:black; stroke-width:4; fill:none;"/>
+            </svg>
+
+            <div class="div_input">
+              <label class="label_fst"> Первый угол <input type="number" min="0" placeholder="Введите значение" class="raz input_angle_fst"></label>
+              <label class="label_snd"> Второй угол <input type="number" min="0" placeholder="Введите значение" class="raz input_angle_snd"></label>
+              <label class="label_trd"> Третий угол <input type="number" min="0" placeholder="Введите значение" class="raz input_angle_trd"></label>
+              <label class="label_frth"> Четвертый угол <input type="number" min="0" placeholder="Введите значение" class="raz input_angle_frth"></label>
+            </div>
+
+            <div id="next_t" class="next next_form">Далее</div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+
+
+    <form class="main_form" action="">
+      <fieldset>
+        <legend>Результат</legend>
+        <div>
+          <p class="str" style="white-space: pre-line">Введите искомое и получите результат.
+
+            <span>(Нажмите кнопку "решение", чтобы получить алгоритм решения)</span></p>
+
+
+          <select class="className" name="select"> <!--Supplement an id here instead of using 'name'-->
+            <option disabled selected>Выберите действие</option>
+            <option value="value1">Вычислить площадь</option>
+            <option value="value2">Вычислить периметр</option>
+            <option value="value3">Вычислить сторону</option>
+          </select>
+
+          <div>
+            <label style=" grid-row-start: 4;position: absolute; margin-top: 250px; margin-left: -50px"> Ответ <output type="number" min="1" placeholder="Введите значение" class="raz input_angle_frth daser" style="font-size: 5vh; margin-left: 10px; display: none">4</output></label>
+          </div>
+
+          <div id="c" class="next next_form">Решение</div>
+        </div>
+      </fieldset>
+    </form>
+
+  </div>
+
+</body>
+
+</html>
