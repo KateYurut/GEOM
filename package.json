@@ -1,0 +1,24 @@
+{
+  "name": "geom",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "@types/d3": "^6.6.0",
+    "cookie-parser": "~1.4.4",
+    "d3": "^6.7.0",
+    "d3-selection": "^2.0.0",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "jquery": "^3.6.0",
+    "jsdom": "^16.5.2",
+    "morgan": "~1.9.1"
+  },
+  "main": "app.js",
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
